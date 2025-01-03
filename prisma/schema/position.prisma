@@ -1,0 +1,11 @@
+// Employee positions
+
+model Position {
+    id     Int      @id @default(autoincrement())
+    name   String   
+    active Boolean? @default(true)
+
+    user User[]
+
+    @@map("positions")
+}

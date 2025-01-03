@@ -1,0 +1,15 @@
+// User roles
+
+model Role {
+    id     Int      @id @default(autoincrement())
+    name   String   
+    active Boolean? @default(true)
+
+    cityId Int
+    city   City @relation(fields: [cityId], references: [id])
+
+    users       User[]
+    permissions Permission[]
+
+    @@map("roles")
+}

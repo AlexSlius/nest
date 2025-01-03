@@ -1,0 +1,13 @@
+// Category
+
+model Category {
+    id          Int      @id @default(autoincrement())
+    name        String
+    description String?
+    active      Boolean? @default(true)
+    order       Int      @default(0)
+
+    subcategories SubCategory[]
+
+    @@map("categorys")
+}

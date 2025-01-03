@@ -1,0 +1,11 @@
+// Order status
+
+model Status {
+    id        Int      @id @default(autoincrement())
+    name      String
+    colorText String   @map("color_text")
+    colotBg   String   @map("color_bg")
+    active    Boolean? @default(true)
+
+    @@map("statuses")
+}

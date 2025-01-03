@@ -1,0 +1,9 @@
+// Source for customers
+
+model Source {
+    id     Int      @id @default(autoincrement())
+    name   String
+    active Boolean? @default(true)
+
+    @@map("sources")
+}
