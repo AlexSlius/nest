@@ -2,6 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Category {
+  active: Boolean
+  children: [Category!]
+  description: String
+  id: Int!
+  name: String
+  parentId: Int
+}
+
 type City {
   """Активне не активне місто true/false"""
   active: Boolean
@@ -17,7 +26,18 @@ type City {
   name: String
 }
 
+input CreatePermissionInput {
+  active: Boolean
+  allowedCreate: Boolean!
+  allowedDelete: Boolean!
+  allowedGetAll: Boolean!
+  allowedGetOne: Boolean!
+  allowedUpdate: Boolean!
+  resource: String!
+}
+
 type Mutation {
+  createCategory(active: Boolean, description: String, name: String!, parentId: Int): Category!
   createCity(
     active: Boolean
     lat: Float
@@ -26,9 +46,13 @@ type Mutation {
     """Назва міста."""
     name: String!
   ): City!
+  createRole(active: Boolean, name: String!, permissions: [CreatePermissionInput!]!): Role!
   createUser(active: Boolean, cityId: Int!, email: String!, middleName: String!, name: String!, password: String!, phone: String!, placeId: Int!, positionid: Int!, roleId: Int!, surname: String!): User!
   deleteCity(id: Int!): Boolean!
+  deleteRole(id: Int!): Role!
   deleteUser(id: Int!): User!
+  removeCategory(id: Int!): Category!
+  updateCategory(active: Boolean, description: String, id: Int!, name: String, parentId: Int): Category!
   updateCity(
     active: Boolean
     id: Int!
@@ -38,14 +62,55 @@ type Mutation {
     """Назва міста."""
     name: String
   ): Boolean!
+  updateRole(active: Boolean, id: Int!, name: String, permissions: [UpdatePermissionInput!]): Role!
   updateUser(active: Boolean, cityId: Int, email: String, id: Int!, middleName: String, name: String, password: String, phone: String, placeId: Int, positionid: Int, roleId: Int, surname: String): User!
 }
 
+type Permission {
+  active: Boolean
+  allowedCreate: Boolean
+  allowedDelete: Boolean
+  allowedGetAll: Boolean
+  allowedGetOne: Boolean
+  allowedUpdate: Boolean
+  id: Int!
+  resource: String
+}
+
 type Query {
+  categories: [Category!]!
+  category(id: Int!): Category!
   cities: [City!]!
   city(id: Int!): City!
+  role(id: Int!): Role!
+  roles: [Role!]!
+  typeRequest: [TypesRequest!]!
   user(id: Int!): User!
   users: [User!]!
+}
+
+type Role {
+  active: Boolean
+  id: Int!
+  name: String
+  permissions: [Permission!]!
+}
+
+type TypesRequest {
+  description: String
+  key: String!
+  name: String
+}
+
+input UpdatePermissionInput {
+  active: Boolean
+  allowedCreate: Boolean!
+  allowedDelete: Boolean!
+  allowedGetAll: Boolean!
+  allowedGetOne: Boolean!
+  allowedUpdate: Boolean!
+  id: Int!
+  resource: String!
 }
 
 type User {
@@ -58,5 +123,6 @@ type User {
   middleName: String
   name: String
   phone: String
+  role: Role
   surname: String
 }

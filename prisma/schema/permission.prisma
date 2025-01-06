@@ -5,13 +5,12 @@ model Permission {
     resource      String  
     active        Boolean @default(true)
     allowedCreate Boolean @default(true)
-    allowedRead   Boolean @default(true)
     allowedUpdate Boolean @default(true)
     allowedDelete Boolean @default(true)
     allowedGetOne Boolean @default(true)
     allowedGetAll Boolean @default(true)
 
-    Role   Role @relation(fields: [roleId], references: [id])
+    Role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
     roleId Int
 
     @@map("permissions")

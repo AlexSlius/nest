@@ -7,7 +7,6 @@ model City {
     lng    Decimal? @default(0) @db.Decimal(10, 6)
     active Boolean? @default(true)
 
-    roles  Role[]
     users  User[]
     places Place[]
 

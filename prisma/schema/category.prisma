@@ -1,13 +1,13 @@
-// Category
+// Categorys
 
 model Category {
     id          Int      @id @default(autoincrement())
-    name        String
-    description String?
-    active      Boolean? @default(true)
-    order       Int      @default(0)
+    name        String   @unique
+    description String?  @default("")
+    parentId    Int?
+    active      Boolean  @default(true)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 
-    subcategories SubCategory[]
-
-    @@map("categorys")
+    @@map("categories")
 }

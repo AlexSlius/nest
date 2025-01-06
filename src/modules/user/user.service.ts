@@ -37,7 +37,12 @@ export class UserService {
   findAll() {
     return this.prisma.user.findMany({
       include: {
-        city: true
+        city: true,
+        role: {
+          include: {
+            permissions: true, 
+          },
+        }
       },
     });
   }
@@ -46,7 +51,12 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: { id },
       include: {
-        city: true
+        city: true,
+        role: {
+          include: {
+            permissions: true, 
+          },
+        }
       },
     });
 

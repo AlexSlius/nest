@@ -14,7 +14,6 @@ async function main() {
     await prisma.role.create({
         data: {
             name: 'Адміністратор',
-            cityId: 1
         },
     });
 

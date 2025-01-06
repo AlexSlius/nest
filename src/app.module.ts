@@ -6,6 +6,9 @@ import { CityModule } from './modules/city/city.module';
 import { UserModule } from './modules/user/user.module';
 import { APP_FILTER } from '@nestjs/core';
 import { PrismaGraphQLExceptionFilter } from './common/filters/prisma-graphql-exception.filter';
+import { CategoryModule } from './modules/category/category.module';
+import { RoleModule } from './modules/role/role.module';
+import { TypesRequestModule } from './modules/types-request/types-request.module';
 
 @Module({
   imports: [
@@ -18,6 +21,9 @@ import { PrismaGraphQLExceptionFilter } from './common/filters/prisma-graphql-ex
     PrismaModule,
     CityModule,
     UserModule,
+    CategoryModule,
+    RoleModule,
+    TypesRequestModule,
   ],
   controllers: [],
   providers: [
