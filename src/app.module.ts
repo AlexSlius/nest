@@ -9,6 +9,8 @@ import { PrismaGraphQLExceptionFilter } from './common/filters/prisma-graphql-ex
 import { CategoryModule } from './modules/category/category.module';
 import { RoleModule } from './modules/role/role.module';
 import { TypesRequestModule } from './modules/types-request/types-request.module';
+import { CrmPagesModule } from './modules/crm-page/crm-page.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { TypesRequestModule } from './modules/types-request/types-request.module
     CategoryModule,
     RoleModule,
     TypesRequestModule,
+    CrmPagesModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [

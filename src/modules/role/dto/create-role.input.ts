@@ -1,6 +1,18 @@
 import { ArgsType, InputType, Field } from '@nestjs/graphql';
 
 @InputType()
+export class CreatePermissionPage {
+  @Field(() => String)
+  key: string
+
+  @Field(() => String)
+  url: string
+
+  @Field(() => Boolean, { nullable: true })
+  active?: boolean
+}
+
+@InputType()
 export class CreatePermissionInput {
   @Field(() => String)
   resource: string
@@ -34,4 +46,7 @@ export class CreateRoleInput {
 
   @Field(() => [CreatePermissionInput])
   permissions: CreatePermissionInput[]
+
+  @Field(() => [CreatePermissionPage])
+  permissionPages: CreatePermissionPage[]
 }

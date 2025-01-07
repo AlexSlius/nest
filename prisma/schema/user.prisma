@@ -22,5 +22,7 @@ model User {
     positionid Int
     position   Position @relation(fields: [positionid], references: [id])
 
+    auth Auth?
+
     @@map("users")
 }

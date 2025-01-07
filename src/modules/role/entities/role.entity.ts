@@ -1,6 +1,24 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()
+class permissionPage {
+  @Field(() => Int)
+  id: number
+
+  @Field(() => String, { nullable: true })
+  key?: string
+
+  @Field(() => String, { nullable: true })
+  url?: string
+
+  @Field(() => Boolean, { nullable: true })
+  active?: boolean
+
+  @Field(() => Int)
+  roleId: number
+}
+
+@ObjectType()
 class Permission {
   @Field(() => Int)
   id: number
@@ -25,6 +43,9 @@ class Permission {
 
   @Field(() => Boolean, { nullable: true })
   allowedGetAll?: boolean
+
+  @Field(() => Int)
+  roleId: number
 }
 
 @ObjectType()
@@ -38,6 +59,9 @@ export class Role {
   @Field(() => Boolean, { nullable: true })
   active: boolean
 
-  @Field(() => [Permission])
+  @Field(() => [Permission], { nullable: true })
   permissions: Permission[]
+
+  @Field(() => [permissionPage], { nullable: true })
+  permissionPages: permissionPage
 }

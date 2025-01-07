@@ -1,0 +1,13 @@
+// Permission to pages
+
+model PermissionPage {
+    id     Int      @id @default(autoincrement())
+    key    String
+    url    String
+    active Boolean? @default(true)
+
+    roleId Int
+    role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+    @@map("permission_pages")
+}

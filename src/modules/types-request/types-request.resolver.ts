@@ -6,7 +6,7 @@ import { TypesRequest } from './entities/types-request.entity';
 export class TypesRequestResolver {
   constructor(private readonly typesRequestService: TypesRequestService) { }
 
-  @Query(() => [TypesRequest], { name: 'typeRequest' })
+  @Query(() => [TypesRequest], { name: 'typesRequests' })
   findAll() {
     return this.typesRequestService.findAll();
   }

@@ -41,6 +41,7 @@ export class UserService {
         role: {
           include: {
             permissions: true, 
+            permissionPages: true,
           },
         }
       },
@@ -55,6 +56,7 @@ export class UserService {
         role: {
           include: {
             permissions: true, 
+            permissionPages: true,
           },
         }
       },
