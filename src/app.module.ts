@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { PrismaModule } from '../prisma/prisma.module';
 import { CityModule } from './modules/city/city.module';
@@ -11,6 +13,8 @@ import { RoleModule } from './modules/role/role.module';
 import { TypesRequestModule } from './modules/types-request/types-request.module';
 import { CrmPagesModule } from './modules/crm-page/crm-page.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { PlaceModule } from './modules/place/place.module';
+import { PositionModule } from './modules/position/position.module';
 
 @Module({
   imports: [
@@ -19,6 +23,13 @@ import { AuthModule } from './modules/auth/auth.module';
       autoSchemaFile: 'schema.gql', // Automatically generated
       sortSchema: true,
       playground: true,
+      context: ({ req }) => ({ headers: req.headers }), // Putting Headlines into Context
+    }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET, // replace with your secret phrase
+      signOptions: { expiresIn: '240h' }, // token expiration date
     }),
     PrismaModule,
     CityModule,
@@ -28,6 +39,8 @@ import { AuthModule } from './modules/auth/auth.module';
     TypesRequestModule,
     CrmPagesModule,
     AuthModule,
+    PlaceModule,
+    PositionModule,
   ],
   controllers: [],
   providers: [

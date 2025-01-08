@@ -1,8 +1,0 @@
-// Pages crm
-
-model Page {
-    id   Int    @id @default(autoincrement())
-    name String
-
-    @@map("pages")
-}

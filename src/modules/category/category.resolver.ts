@@ -1,14 +1,17 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './entities/category.entity';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
+import { AuthGuard } from '../../common/guards/auth.guard';
 
 @Resolver(() => Category)
+@UseGuards(AuthGuard)
 export class CategoryResolver {
   constructor(private readonly categoryService: CategoryService) { }
 
-  @Mutation(() => Category, {name: 'createCategory'})
+  @Mutation(() => Category, { name: 'createCategory' })
   createCategory(@Args() createCategoryInput: CreateCategoryInput) {
     return this.categoryService.create(createCategoryInput);
   }

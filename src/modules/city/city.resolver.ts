@@ -1,11 +1,14 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 import { CityService } from './city.service';
 import { City } from './entities/city.entity';
 import { CreateCityInput } from './dto/create-city.input';
 import { UpdateCityInput } from './dto/update-city.input';
+import { AuthGuard } from '../../common/guards/auth.guard';
 
 
 @Resolver(() => City)
+@UseGuards(AuthGuard)
 export class CityResolver {
   constructor(private readonly cityService: CityService) { }
 
