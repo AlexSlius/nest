@@ -1,6 +1,8 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { City } from '../../city/entities/city.entity';
 import { Role } from "../../role/entities/role.entity";
+import { Place } from "../../place/entities/place.entity";
+import { Position } from "../../position/entities/position.entity";
 
 @ObjectType()
 export class User {
@@ -8,28 +10,32 @@ export class User {
   id: number;
 
   @Field({ nullable: true })
-  name: string;
+  name?: string;
 
   @Field({ nullable: true })
-  middleName: String
+  middleName?: String
 
   @Field({ nullable: true })
-  surname: String
+  surname?: String
 
   @Field({ nullable: true })
-  active: Boolean
+  active?: Boolean
 
   @Field({ nullable: true })
-  phone: String
+  phone?: String
 
   @Field({ nullable: true })
-  email: String
+  email?: String
 
-  @Field({ nullable: true })
-  @Field(() => City)
-  city: City;
+  @Field(() => City, { nullable: true })
+  city?: City;
 
-  @Field({ nullable: true })
-  @Field(() => Role)
-  role: Role;
+  @Field(() => Role, { nullable: true })
+  role?: Role;
+
+  @Field(() => Place, { nullable: true })
+  place?: Place
+
+  @Field(() => Position, { nullable: true })
+  position?: Position
 }

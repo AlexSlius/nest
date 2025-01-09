@@ -2,7 +2,9 @@
 
 model Place {
     id   Int    @id @default(autoincrement())
-    name String
+    name String @unique
+
+    address String? @default("")
 
     cityId Int
     city   City @relation(fields: [cityId], references: [id])

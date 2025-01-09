@@ -1,10 +1,13 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
+import { Users } from './entities/users.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { ParamsGetAll } from './dto/get-all.input';
 import { AuthGuard } from '../../common/guards/auth.guard';
+import { ValidationPaginationPipe } from 'src/common/pipes/validate-pagination.pipe';
 
 @Resolver(() => User)
 @UseGuards(AuthGuard)
@@ -16,9 +19,10 @@ export class UserResolver {
     return this.userService.create(args);
   }
 
-  @Query(() => [User], { name: 'users' })
-  findAll() {
-    return this.userService.findAll();
+  @Query(() => Users, { name: 'users' })
+  @UsePipes(new ValidationPaginationPipe(1, 10))
+  findAll(@Args() args: ParamsGetAll) {
+    return this.userService.findAll(args);
   }
 
   @Query(() => User, { name: 'user' })

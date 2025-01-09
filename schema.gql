@@ -50,9 +50,24 @@ type CrmPage {
   url: String
 }
 
+input Filter {
+  active: Boolean
+  cityId: Int
+  email: String
+  name: String
+  phone: String
+}
+
 type Login {
   token: String!
   user: User!
+}
+
+type MetaPagination {
+  lastPage: Int
+  limit: Int
+  page: Int
+  total: Int
 }
 
 type Mutation {
@@ -65,14 +80,18 @@ type Mutation {
     """Назва міста."""
     name: String!
   ): City!
+  createPlace(address: String, cityId: Int!, name: String!): Place!
+  createPosition(active: Boolean, name: String!): Position!
   createRole(active: Boolean, name: String!, permissionPages: [CreatePermissionPage!]!, permissions: [CreatePermissionInput!]!): Role!
   createUser(active: Boolean, cityId: Int!, email: String!, middleName: String!, name: String!, password: String!, phone: String!, placeId: Int!, positionid: Int!, roleId: Int!, surname: String!): User!
+  deleteCategory(id: Int!): Category!
   deleteCity(id: Int!): Boolean!
+  deletePlace(id: Int!): Place!
+  deletePosition(id: Int!): Position!
   deleteRole(id: Int!): Role!
   deleteUser(id: Int!): User!
   login(email: String!, password: String!): Login!
   logout: Boolean!
-  removeCategory(id: Int!): Category!
   updateCategory(active: Boolean, description: String, id: Int!, name: String, parentId: Int): Category!
   updateCity(
     active: Boolean
@@ -83,8 +102,15 @@ type Mutation {
     """Назва міста."""
     name: String
   ): Boolean!
+  updatePlace(address: String, cityId: Int, id: Int!, name: String): Place!
+  updatePosition(active: Boolean, id: Int!, name: String): Position!
   updateRole(active: Boolean, id: Int!, name: String, permissionPages: [UpdatePermissionPage!], permissions: [UpdatePermissionInput!]): Role!
   updateUser(active: Boolean, cityId: Int, email: String, id: Int!, middleName: String, name: String, password: String, phone: String, placeId: Int, positionid: Int, roleId: Int, surname: String): User!
+}
+
+input Pagination {
+  limit: Int = 10
+  page: Int = 1
 }
 
 type Permission {
@@ -99,17 +125,35 @@ type Permission {
   roleId: Int!
 }
 
+type Place {
+  address: String
+  city: City
+  cityId: Int
+  id: Int!
+  name: String
+}
+
+type Position {
+  active: Boolean
+  id: Int!
+  name: String
+}
+
 type Query {
   categories: [Category!]!
   category(id: Int!): Category!
   cities: [City!]!
   city(id: Int!): City!
   crmPages: [CrmPage!]!
+  place(id: Int!): Place!
+  places: [Place!]!
+  position(id: Int!): Position!
+  positions: [Position!]!
   role(id: Int!): Role!
   roles: [Role!]!
   typesRequests: [TypesRequest!]!
   user(id: Int!): User!
-  users: [User!]!
+  users(filter: Filter, pagination: Pagination): Users!
 }
 
 type Role {
@@ -164,8 +208,15 @@ type User {
   middleName: String
   name: String
   phone: String
+  place: Place
+  position: Position
   role: Role
   surname: String
+}
+
+type Users {
+  data: [User!]!
+  meta: MetaPagination!
 }
 
 type permissionPage {

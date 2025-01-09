@@ -2,7 +2,7 @@
 
 model Position {
     id     Int      @id @default(autoincrement())
-    name   String   
+    name   String   @unique
     active Boolean? @default(true)
 
     user User[]

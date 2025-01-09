@@ -31,7 +31,7 @@ export class CategoryResolver {
     return this.categoryService.update(updateCategoryInput.id, updateCategoryInput);
   }
 
-  @Mutation(() => Category)
+  @Mutation(() => Category, {name: "deleteCategory"})
   removeCategory(@Args('id', { type: () => Int }) id: number) {
     return this.categoryService.remove(id);
   }

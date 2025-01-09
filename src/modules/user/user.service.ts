@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { ParamsGetAll } from './dto/get-all.input';
 import { PrismaService } from 'prisma/prisma.service';
 import { PasswordServis } from 'src/common/services/password.service';
 
@@ -34,18 +35,55 @@ export class UserService {
     })
   }
 
-  findAll() {
-    return this.prisma.user.findMany({
-      include: {
-        city: true,
-        role: {
-          include: {
-            permissions: true, 
-            permissionPages: true,
-          },
+  async findAll(args: ParamsGetAll) {
+    const {
+      pagination: { page, limit },
+    } = args;
+    const skip = (page - 1) * limit;
+
+    const filtersArr = [
+      ...(args?.filter?.email ? [{ email: { startsWith: args.filter.email, mode: 'insensitive' as 'insensitive' } }] : []),
+      ...(args?.filter?.phone ? [{ phone: { startsWith: args.filter.phone, mode: 'insensitive' as 'insensitive' } }] : []),
+      ...(args?.filter?.name ? [{ name: { startsWith: args.filter.name, mode: 'insensitive' as 'insensitive' } }] : []),
+      ...(args?.filter?.cityId ? [{ cityId: args.filter.cityId }] : []),
+      ...(args?.filter?.active !== undefined ? [{ active: args.filter.active }] : []),
+    ]
+
+    const [data, total] = await Promise.all([
+      this.prisma.user.findMany({
+        skip,
+        take: limit,
+        where: {
+          AND: filtersArr,
+        },
+        include: {
+          city: true,
+          position: true,
+          place: true,
+          role: {
+            include: {
+              permissions: true,
+              permissionPages: true,
+            },
+          }
+        },
+      }),
+      this.prisma.user.count({
+        where: {
+          AND: filtersArr,
         }
-      },
-    });
+      })
+    ]);
+
+    return {
+      data,
+      meta: {
+        limit: page,
+        page: limit,
+        total,
+        lastPage: Math.ceil(total / limit)
+      }
+    }
   }
 
   async findOne(id: number) {
@@ -53,9 +91,11 @@ export class UserService {
       where: { id },
       include: {
         city: true,
+        position: true,
+        place: true,
         role: {
           include: {
-            permissions: true, 
+            permissions: true,
             permissionPages: true,
           },
         }
