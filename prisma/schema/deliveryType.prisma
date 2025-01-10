@@ -1,0 +1,9 @@
+// Delivery
+
+model DeliveryType {
+    id     Int      @id @default(autoincrement())
+    name   String
+    active Boolean? @default(true)
+
+    @@map("delivery_type")
+}

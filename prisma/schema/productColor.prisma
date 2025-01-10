@@ -1,0 +1,15 @@
+// Color product
+
+model ProductColor {
+    id        Int      @id @default(autoincrement())
+    name      String
+    color     String
+    active    Boolean? @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    productsAsColorOne Product[] @relation("ColorOneRelation")
+    productsAsColorTwo Product[] @relation("ColorTwoRelation")
+
+    @@map("product_color")
+}

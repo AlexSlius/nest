@@ -1,0 +1,11 @@
+// product brand
+
+model Brand {
+    id     Int     @id @default(autoincrement())
+    name   String
+    active Boolean @default(true)
+
+    products Product[]
+
+    @@map("brand")
+}

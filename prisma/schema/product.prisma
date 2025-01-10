@@ -1,1 +1,40 @@
 // Product
+
+model Product {
+    id               Int     @id @default(autoincrement())
+    name             String
+    article          String  @unique
+    description      String? @default("")
+    shortDescription String? @default("")
+    cost             Float
+    costOld          Float
+    quantity         Int
+    active           Boolean @default(true)
+    barcode          String?
+    nameColorImage   String? @default("")
+    colorImage       String? @default("")
+
+    images ProductImage[]
+
+    colorOneId Int?
+    colorOne   ProductColor? @relation("ColorOneRelation", fields: [colorOneId], references: [id])
+
+    colorTwoId Int?
+    colorTwo   ProductColor? @relation("ColorTwoRelation", fields: [colorTwoId], references: [id])
+
+    categories CategoriesOnProducts[]
+
+    productGroupId Int?
+    productGroup   ProductGroup? @relation(fields: [productGroupId], references: [id])
+
+    brandId Int
+    brand   Brand? @relation(fields: [brandId], references: [id])
+
+    compositionId Int
+    composition   Composition @relation(fields: [compositionId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("product")
+}

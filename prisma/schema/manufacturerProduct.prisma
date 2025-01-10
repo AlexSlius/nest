@@ -1,0 +1,8 @@
+// Manufacturer product
+
+model Manufacturer {
+    id   Int    @id @default(autoincrement())
+    name String
+
+    @@map("manufacturer_product")
+}

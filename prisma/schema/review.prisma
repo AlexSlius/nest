@@ -1,0 +1,9 @@
+// Review
+
+model Review {
+    id    Int    @id @default(autoincrement())
+    phone String
+    description String
+
+    @@map("review")
+}

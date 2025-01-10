@@ -1,0 +1,14 @@
+// Client
+
+model Client {
+    id         Int      @id @default(autoincrement())
+    name       String
+    middleName String?  @default("")
+    surname    String
+    active     Boolean? @default(true)
+    phone      String   @unique
+    email      String?  @unique
+    
+
+    @@map("client")
+}

@@ -7,8 +7,9 @@ model City {
     lng    Decimal? @default(0) @db.Decimal(10, 6)
     active Boolean? @default(true)
 
-    users  User[]
-    places Place[]
+    users       User[]
+    places      Place[]
+    composition Composition[]
 
     @@map("cities")
 }

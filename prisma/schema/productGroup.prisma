@@ -1,0 +1,10 @@
+// Product group
+
+model ProductGroup {
+    id   Int    @id @default(autoincrement())
+    name String
+    
+    product Product[]
+
+    @@map("product_group")
+}

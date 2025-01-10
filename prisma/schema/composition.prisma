@@ -1,0 +1,14 @@
+// Composition 
+
+model Composition {
+    id     Int      @id @default(autoincrement())
+    name   String
+    active Boolean? @default(true)
+
+    cityId Int
+    city   City @relation(fields: [cityId], references: [id])
+
+    products Product[]
+
+    @@map("composition")
+}

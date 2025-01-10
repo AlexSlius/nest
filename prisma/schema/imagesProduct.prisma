@@ -1,0 +1,11 @@
+// Product image
+
+model ProductImage {
+    id        Int      @id @default(autoincrement())
+    url       String
+    order     Int      @default(autoincrement())
+    Product   Product? @relation(fields: [productId], references: [id])
+    productId Int?
+
+    @@map("product_image")
+}
