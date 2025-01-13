@@ -15,6 +15,10 @@ import { CrmPagesModule } from './modules/crm-page/crm-page.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { PlaceModule } from './modules/place/place.module';
 import { PositionModule } from './modules/position/position.module';
+import { CompositionModule } from './modules/composition/composition.module';
+import { BrandModule } from './modules/brand/brand/brand.module';
+import { ProductGroupModule } from './modules/product-group/product-group.module';
+import { ColorModule } from './modules/color/color.module';
 
 @Module({
   imports: [
@@ -41,6 +45,10 @@ import { PositionModule } from './modules/position/position.module';
     AuthModule,
     PlaceModule,
     PositionModule,
+    CompositionModule,
+    BrandModule,
+    ProductGroupModule,
+    ColorModule,
   ],
   controllers: [],
   providers: [
