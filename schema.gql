@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Brand {
+  active: Boolean
+  id: Int!
+  name: String
+}
+
 type Category {
   active: Boolean
   children: [Category!]
@@ -85,6 +91,7 @@ type MetaPagination {
 }
 
 type Mutation {
+  createBrand(active: Boolean, name: String!): Brand!
   createCategory(active: Boolean, description: String, name: String!, parentId: Int): Category!
   createCity(
     active: Boolean
@@ -98,18 +105,22 @@ type Mutation {
   createComposition(active: Boolean = true, cityId: Int!, name: String!): Composition!
   createPlace(address: String, cityId: Int!, name: String!): Place!
   createPosition(active: Boolean, name: String!): Position!
+  createProducGroup(name: String!): ProductGroup!
   createRole(active: Boolean, name: String!, permissionPages: [CreatePermissionPage!]!, permissions: [CreatePermissionInput!]!): Role!
   createUser(active: Boolean, cityId: Int!, email: String!, middleName: String!, name: String!, password: String!, phone: String!, placeId: Int!, positionid: Int!, roleId: Int!, surname: String!): User!
+  deleteBrand(id: Int!): Brand!
   deleteCategory(id: Int!): Category!
   deleteCity(id: Int!): Boolean!
   deleteColor(id: Int!): Color!
   deleteComposition(id: Int!): Composition!
   deletePlace(id: Int!): Place!
   deletePosition(id: Int!): Position!
+  deleteProducGroup(id: Int!): ProductGroup!
   deleteRole(id: Int!): Role!
   deleteUser(id: Int!): User!
   login(email: String!, password: String!): Login!
   logout: Boolean!
+  updateBrand(active: Boolean, id: Int!, name: String): Brand!
   updateCategory(active: Boolean, description: String, id: Int!, name: String, parentId: Int): Category!
   updateCity(
     active: Boolean
@@ -124,6 +135,7 @@ type Mutation {
   updateComposition(active: Boolean = true, cityId: Int, id: Int!, name: String): Composition!
   updatePlace(address: String, cityId: Int, id: Int!, name: String): Place!
   updatePosition(active: Boolean, id: Int!, name: String): Position!
+  updateProducGroup(id: Int!, name: String): ProductGroup!
   updateRole(active: Boolean, id: Int!, name: String, permissionPages: [UpdatePermissionPage!], permissions: [UpdatePermissionInput!]): Role!
   updateUser(active: Boolean, cityId: Int, email: String, id: Int!, middleName: String, name: String, password: String, phone: String, placeId: Int, positionid: Int, roleId: Int, surname: String): User!
 }
@@ -159,7 +171,14 @@ type Position {
   name: String
 }
 
+type ProductGroup {
+  id: Int!
+  name: String
+}
+
 type Query {
+  brand(id: Int!): Brand!
+  brands: [Brand!]!
   categories: [Category!]!
   category(id: Int!): Category!
   cities: [City!]!
@@ -173,6 +192,8 @@ type Query {
   places: [Place!]!
   position(id: Int!): Position!
   positions: [Position!]!
+  producGroup(id: Int!): ProductGroup!
+  producGroups: [ProductGroup!]!
   role(id: Int!): Role!
   roles: [Role!]!
   typesRequests: [TypesRequest!]!
