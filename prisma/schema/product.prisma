@@ -33,6 +33,11 @@ model Product {
     compositionId Int
     composition   Composition @relation(fields: [compositionId], references: [id])
 
+    manufacturerId Int
+    manufacturer Manufacturer @relation(fields: [manufacturerId], references: [id])
+
+    ValueFeatures ValueFeatureOnProduct[]
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 

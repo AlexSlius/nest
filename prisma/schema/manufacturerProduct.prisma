@@ -4,5 +4,7 @@ model Manufacturer {
     id   Int    @id @default(autoincrement())
     name String
 
+    produts Product[]
+
     @@map("manufacturer_product")
 }

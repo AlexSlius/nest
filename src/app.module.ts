@@ -19,6 +19,9 @@ import { CompositionModule } from './modules/composition/composition.module';
 import { BrandModule } from './modules/brand/brand.module';
 import { ProductGroupModule } from './modules/product-group/product-group.module';
 import { ColorModule } from './modules/color/color.module';
+import { ManufacturerModule } from './modules/manufacturer/manufacturer.module';
+import { FeatureModule } from './modules/feature/feature.module';
+import { ValueFeatureModule } from './modules/value-feature/value-feature.module';
 
 @Module({
   imports: [
@@ -49,6 +52,9 @@ import { ColorModule } from './modules/color/color.module';
     BrandModule,
     ProductGroupModule,
     ColorModule,
+    ManufacturerModule,
+    FeatureModule,
+    ValueFeatureModule,
   ],
   controllers: [],
   providers: [

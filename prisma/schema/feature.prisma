@@ -1,0 +1,14 @@
+// Features
+
+model Feature {
+    id     Int      @id @default(autoincrement())
+    name   String   @unique
+    active Boolean? @default(true)
+
+    valueFeature ValueFeature[]
+
+    createAt DateTime @default(now())
+    updateAt DateTime @updatedAt
+
+    @@map("features")
+}

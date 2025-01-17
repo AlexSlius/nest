@@ -70,6 +70,12 @@ type CrmPage {
   url: String
 }
 
+type Feature {
+  active: Boolean
+  id: Int!
+  name: String
+}
+
 input Filter {
   active: Boolean
   cityId: Int
@@ -81,6 +87,11 @@ input Filter {
 type Login {
   token: String!
   user: User!
+}
+
+type Manufacture {
+  id: Int!
+  name: String
 }
 
 type MetaPagination {
@@ -103,6 +114,8 @@ type Mutation {
   ): City!
   createColor(active: Boolean = true, color: String!, name: String!): Color!
   createComposition(active: Boolean = true, cityId: Int!, name: String!): Composition!
+  createFeature(active: Boolean = true, name: String!): Feature!
+  createManufacture(name: String!): Manufacture!
   createPlace(address: String, cityId: Int!, name: String!): Place!
   createPosition(active: Boolean, name: String!): Position!
   createProducGroup(name: String!): ProductGroup!
@@ -113,6 +126,8 @@ type Mutation {
   deleteCity(id: Int!): Boolean!
   deleteColor(id: Int!): Color!
   deleteComposition(id: Int!): Composition!
+  deleteFeature(id: Int!): Feature!
+  deleteManufacture(id: Int!): Manufacture!
   deletePlace(id: Int!): Place!
   deletePosition(id: Int!): Position!
   deleteProducGroup(id: Int!): ProductGroup!
@@ -133,6 +148,8 @@ type Mutation {
   ): Boolean!
   updateColor(active: Boolean = true, color: String, id: Int!, name: String): Color!
   updateComposition(active: Boolean = true, cityId: Int, id: Int!, name: String): Composition!
+  updateFeature(active: Boolean = true, id: Int!, name: String): Feature!
+  updateManufacture(id: Int!, name: String): Manufacture!
   updatePlace(address: String, cityId: Int, id: Int!, name: String): Place!
   updatePosition(active: Boolean, id: Int!, name: String): Position!
   updateProducGroup(id: Int!, name: String): ProductGroup!
@@ -188,6 +205,10 @@ type Query {
   composition(id: Int!): Composition!
   compositions: [Composition!]!
   crmPages: [CrmPage!]!
+  feature(id: Int!): Feature!
+  features: [Feature!]!
+  manufacture(id: Int!): Manufacture!
+  manufactures: [Manufacture!]!
   place(id: Int!): Place!
   places: [Place!]!
   position(id: Int!): Position!

@@ -1,0 +1,17 @@
+// Value feature
+
+model ValueFeature {
+    id     Int      @id @default(autoincrement())
+    name   String   @unique
+    active Boolean? @default(true)
+
+    featureId Int
+    feature   Feature @relation(fields: [featureId], references: [id])
+
+    ValueFeatures ValueFeatureOnProduct[]
+
+    createAt DateTime @default(now())
+    updateAt DateTime @updatedAt
+
+    @@map("value_feature")
+}

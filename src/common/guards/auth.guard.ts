@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
 
         const token = autorization.split(' ')[1];
 
-        if (autorization.startsWith('Bearer ') && token.length < 20)
+        if (!autorization.startsWith('Bearer ') || token.length < 20)
             throw new UnauthorizedException(errorMessage);
 
         try {
