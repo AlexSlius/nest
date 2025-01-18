@@ -121,6 +121,7 @@ type Mutation {
   createProducGroup(name: String!): ProductGroup!
   createRole(active: Boolean, name: String!, permissionPages: [CreatePermissionPage!]!, permissions: [CreatePermissionInput!]!): Role!
   createUser(active: Boolean, cityId: Int!, email: String!, middleName: String!, name: String!, password: String!, phone: String!, placeId: Int!, positionid: Int!, roleId: Int!, surname: String!): User!
+  createValueFeature(active: Boolean = true, featureId: Int!, name: String!): ValueFeature!
   deleteBrand(id: Int!): Brand!
   deleteCategory(id: Int!): Category!
   deleteCity(id: Int!): Boolean!
@@ -205,6 +206,7 @@ type Query {
   composition(id: Int!): Composition!
   compositions: [Composition!]!
   crmPages: [CrmPage!]!
+  deleteFeatures(id: Int!): ValueFeature!
   feature(id: Int!): Feature!
   features: [Feature!]!
   manufacture(id: Int!): Manufacture!
@@ -218,8 +220,11 @@ type Query {
   role(id: Int!): Role!
   roles: [Role!]!
   typesRequests: [TypesRequest!]!
+  updateFeature(active: Boolean = true, featureId: Int, id: Int!, name: String): ValueFeature!
   user(id: Int!): User!
   users(filter: Filter, pagination: Pagination): Users!
+  valueFeature(id: Int!): ValueFeature!
+  valueFeatures: [ValueFeature!]!
 }
 
 type Role {
@@ -283,6 +288,13 @@ type User {
 type Users {
   data: [User!]!
   meta: MetaPagination!
+}
+
+type ValueFeature {
+  active: Boolean
+  feature: Feature
+  id: Int!
+  name: String
 }
 
 type permissionPage {
