@@ -5,8 +5,11 @@ import { ValueFeature as ValueFeatureGraph } from "./entities/value-feature.enti
 import { CreateValueFeatureInput } from './dto/create-value-fature.input';
 import { UpdateValueFaatureInput } from './dto/update-value-fature.input';
 import { ValueFeature } from '@prisma/client';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 
 @Resolver(() => ValueFeatureGraph)
+@UseGuards(AuthGuard)
 export class ValueFeatureResolver {
   constructor(private readonly valueFeatureService: ValueFeatureService) { }
 

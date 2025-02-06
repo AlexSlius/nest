@@ -22,6 +22,7 @@ import { ColorModule } from './modules/color/color.module';
 import { ManufacturerModule } from './modules/manufacturer/manufacturer.module';
 import { FeatureModule } from './modules/feature/feature.module';
 import { ValueFeatureModule } from './modules/value-feature/value-feature.module';
+import { UploadImageModule } from './modules/upload-image/upload-image.module';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import { ValueFeatureModule } from './modules/value-feature/value-feature.module
     ManufacturerModule,
     FeatureModule,
     ValueFeatureModule,
+    UploadImageModule,
   ],
   controllers: [],
   providers: [
